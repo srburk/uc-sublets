@@ -57,6 +57,18 @@ app.get('/api/users', (req, res) => {
     });
 });
 
+app.delete('/api/users/:id', (req, res) => {
+    userModel.deleteOne({ _id: req.params.id }, (err) => {
+        if (err) {
+            res.send("Error deleting");
+            console.log("Error deleting");
+        } else {
+            res.send('Deleted user');
+            console.log('Deleted user');
+        }
+    });
+});
+
 app.get('/', (req, res) => {
     // res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
     res.send('Success!');
