@@ -24,6 +24,7 @@ export default {
                 lastName: this.lastName
             }).then(response => {
                 this.$emit('toggle-add-user-view');
+                console.log(response.data);
                 console.log('Sent toggle-add-user-view');
             });
         }

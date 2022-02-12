@@ -7,9 +7,10 @@ const listingSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    user: {
+    userID: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'user'
+        ref: 'user',
+        required: true
     }
 });
 

@@ -27,6 +27,8 @@ db.on('error', (error) => {
     console.log(error)
 });
 
+// TODO: Add routers to api
+
 // routes
 app.post('/api/users', (req, res) => {
     console.log('POST to /api/users');
@@ -51,7 +53,7 @@ app.post('/api/listings', (req, res) => {
     let newListing = new listingModel;
     newListing._id = mongoose.Types.ObjectId();
     newListing.name = req.body.name;
-    newListing.user = req.body.user;
+    newListing.userID = req.body.userID;
     console.log(newListing);
     newListing.save((err) => {
         if (err) {
