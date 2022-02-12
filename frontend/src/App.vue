@@ -1,22 +1,17 @@
 <template>
+
   <div id="app">
 
     <Header @toggle-add-listing-view="isShowingAddListingView = true; isShowingAddUserView = false" @toggle-add-user-view="isShowingAddUserView = true; isShowingAddListingView = false"></Header>
     
-    <div class="content">
+    <div class="content column">
 
       <AddUserView @toggle-add-user-view="isShowingAddUserView = false" v-show="isShowingAddUserView"></AddUserView>
 
-      <!-- TODO: Change these to components -->
-
-      <!-- <div v-show="isShowingAddListingView">
-        <h2>Add Listing:</h2>
-        <input type="text" placeholder="Title"> 
-        <input type="text" placeholder="Address">
-        <input type="text" placeholder="User">
-      </div> -->
       <AddListingView @toggle-add-listing-view="isShowingAddListingView = false" v-show="isShowingAddListingView"></AddListingView>
       
+      <button style="margin: 15rem; margin-top: 2rem;" @click.native="getAllUsers()">Get All Users</button>
+
     </div>
     
   </div>
@@ -41,14 +36,12 @@ export default {
     AddListingView
   },
   data: () => ({
-    // firstName: '',
-    // lastName: '',
     isShowingAddUserView: false,
     isShowingAddListingView: false
   }),
   methods: {
-    getRequest() {
-      axios.get("http://localhost:3030/").then(response => {
+    getAllUsers() {
+      axios.get('http://localhost:3030/api/users').then(response => {
         console.log(response.data);
       });
     }

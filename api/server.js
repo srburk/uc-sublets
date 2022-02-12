@@ -27,8 +27,8 @@ db.on('error', (error) => {
 });
 
 // routes
-app.post('/api/add', (req, res) => {
-    console.log('pinged!');
+app.post('/api/users', (req, res) => {
+    console.log('POST to /api/users');
     let newUser = new userModel;
     newUser.firstName = req.body.firstName;
     newUser.lastName = req.body.lastName;
@@ -40,6 +40,19 @@ app.post('/api/add', (req, res) => {
         } else {
             res.send(newUser);
             console.log('Added new user')
+        }
+    });
+});
+
+app.get('/api/users', (req, res) => {
+    console.log('GET to /api/users');
+    userModel.find({ }, (err, users) => {
+        if (err) {
+            res.send('Error fetching users');
+            console.log('Error fetching users');
+        } else {
+            res.json(users);
+            console.log(users);
         }
     });
 });

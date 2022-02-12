@@ -1,5 +1,5 @@
 <template>
-    <div class="column">
+    <div>
         <h2>Add User:</h2>
         <input type="text" v-model="firstName" placeholder="First Name">
         <input type="text" v-model="lastName" placeholder="Last Name">
@@ -19,7 +19,7 @@ export default {
     }),
     methods: {
         addUser() {
-            axios.post('http://localhost:3030/api/add', {
+            axios.post('http://localhost:3030/api/users', {
                 firstName: this.firstName,
                 lastName: this.lastName
             }).then(response => {
@@ -33,5 +33,7 @@ export default {
 </script>
 
 <style scoped>
-
+    * {
+        margin: 0.5rem;;
+    }
 </style>

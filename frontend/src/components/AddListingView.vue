@@ -1,5 +1,5 @@
 <template>
-    <div clas="column">
+    <div>
         <h2>Add Listing:</h2>
         <input type="text" placeholder="Title"> 
         <input type="text" placeholder="Address">
@@ -25,5 +25,7 @@ export default {
 </script>
 
 <style scoped>
-
+    * {
+        margin: 0.5rem;;
+    }
 </style>
