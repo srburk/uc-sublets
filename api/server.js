@@ -10,6 +10,7 @@ const port = 3030;
 
 // schema
 let userModel = require('./schema/user_schema');
+let listingModel = require('./schema/listing_schema');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ db.on('error', (error) => {
 app.post('/api/users', (req, res) => {
     console.log('POST to /api/users');
     let newUser = new userModel;
+    newUser._id = mongoose.Types.ObjectId();
     newUser.firstName = req.body.firstName;
     newUser.lastName = req.body.lastName;
     console.log(newUser);
@@ -40,6 +42,24 @@ app.post('/api/users', (req, res) => {
         } else {
             res.send(newUser);
             console.log('Added new user')
+        }
+    });
+});
+
+app.post('/api/listings', (req, res) => {
+    console.log('POST to /api/listings');
+    let newListing = new listingModel;
+    newListing._id = mongoose.Types.ObjectId();
+    newListing.name = req.body.name;
+    newListing.user = req.body.user;
+    console.log(newListing);
+    newListing.save((err) => {
+        if (err) {
+            res.send('Error adding new listing');
+            console.log('Error adding new listing')
+        } else {
+            res.send(newListing);
+            console.log('Added new listing')
         }
     });
 });
