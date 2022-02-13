@@ -1,19 +1,41 @@
 
+// imports 
+const e = require('express');
 const mongoose = require('mongoose');
 const listingModel = require('../schema/listing_schema');
 
+// exports
 exports.list_listings = (req, res) => {
-    console.log('NOT IMPLEMENTED - LIST LISTINGS');
-    res.send('NOT IMPLEMENTED - LIST LISTINGS');
+    console.log('GET to /api/listings');
+
+    listingModel.find({ }, (err, listings) => {
+        if (err) {
+            res.send('Error fetching listings');
+            console.log('Error fetching listings');
+        } else {
+            res.json(listings);
+            console.log(listings);
+        }
+    });
 };
 
 exports.find_listing = (req, res) => {
-    console.log('NOT IMPLEMENTED - FIND LISTINGS');
-    res.send('NOT IMPLEMENTED - FIND LISTINGS');
+    console.log('GET to /api/listings/ID');
+
+    listingModel.findById(req.params.id, (err, listing) => {
+        if (err) {
+            res.send('Error finding listing by ID');
+            console.log('Error finding listing by ID');
+        } else {
+            res.json(listing);
+            console.log(listing);
+        }
+    });
 };
 
 exports.create_listing = (req, res) => {
     console.log('POST to /api/listings');
+
     let newListing = new listingModel;
     newListing._id = mongoose.Types.ObjectId();
     newListing.name = req.body.name;
@@ -24,18 +46,37 @@ exports.create_listing = (req, res) => {
             res.send('Error adding new listing');
             console.log('Error adding new listing')
         } else {
-            res.send(newListing);
+            res.json(newListing);
             console.log('Added new listing')
         }
     });
 }
 
 exports.update_listing = (req, res) => {
-    res.send('NOT IMPLEMENTED - UPDATE LISTING');
-    console.log('NOT IMPLEMENTED - UPDATE LISTING');
+    console.log('PUT to /api/listings/ID');
+
+    listingModel.findByIdAndUpdate(req.params.id, { name: req.body.name, userID: req.body.userID }, (err) => {
+        if (err) {
+            res.send('Error finding listing by ID');
+            console.log('Error finding listing by ID');
+        } else {
+            res.send('Successfully updated listing');
+            console.log('Successfully updated listing');
+        }
+    });
 }
 
 exports.delete_user = (req, res) => {
-    res.send('NOT IMPLEMENTED - DELETE LISTING');
-    console.log('NOT IMPLEMENTED - DELETE LISTING');
+
+    console.log('DELETE to /api/listings/ID');
+
+    listingModel.deleteOne({ _id: req.params.id }, (err) => {
+        if (err) {
+            res.send("Error deleting");
+            console.log("Error deleting");
+        } else {
+            res.send('Deleted listing');
+            console.log('Deleted listing');
+        }
+    });
 }
