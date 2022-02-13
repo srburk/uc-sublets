@@ -12,7 +12,9 @@
       
     <div class="content column">
 
-      <h2 class="row">All Users:</h2>
+      <ListingsGallery :allListings="this.allListings" @load-listings="getAllListings()"></ListingsGallery>
+
+      <!-- <h2 class="row">All Users:</h2>
       <div class="row user-grid">
         <UserCard @reload-users="getAllUsers()" v-for="user in allUsers" :key="user._id" :firstName="user.firstName" :lastName="user.lastName" :userID="user._id"></UserCard>
       </div>
@@ -24,7 +26,7 @@
         <ListingCard v-for="listing in allListings" :key="listing._id" :name="listing.name" :user="listing.user"></ListingCard>
       </div>
 
-      <button style="margin-top: 2rem;" @click.native="getAllListings()">Get All Listings</button>
+      <button style="margin-top: 2rem;" @click.native="getAllListings()">Get All Listings</button> -->
     </div>
     
   </div>
@@ -38,7 +40,8 @@ import Header from './components/Header.vue'
 import AddUserView from './components/AddUserView.vue'
 import AddListingView from './components/AddListingView.vue'
 import UserCard from './components/UserCard.vue'
-import ListingCard from './components/ListingCard.vue'
+// import ListingCard from './components/ListingCard.vue'
+import ListingsGallery from './components/ListingsGallery.vue'
 
 // other imports
 import axios from 'axios';
@@ -50,7 +53,8 @@ export default {
     AddUserView,
     AddListingView,
     UserCard,
-    ListingCard
+    // ListingCard,
+    ListingsGallery
   },
   data: () => ({
     isShowingAddUserView: false,
@@ -86,7 +90,7 @@ export default {
   position: relative;
   top: 3rem;
   z-index: 1;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 /* Flex Classes */
