@@ -2,15 +2,23 @@
     <div class="add-listing-view">
         <h2>Add Listing:</h2>
         <input type="text" v-model="name" placeholder="Name"> 
-        <input type="text" placeholder="Address">
+        <!-- <input type="text" placeholder="Address"> -->
         <select v-model="selectedUser" label="User">
             <option v-for="user in users" :value="{ _id: user._id }" :key="user._id">
                 {{ user.firstName }} {{ user.lastName }}
             </option>
         </select>
 
-        <button @click.native="this.$emit('toggle-add-listing-view')">Cancel</button>
+        <input type="number" v-model="rent" placeholder="Monthly Rent">
+        <input type="date" v-model="startDate">
+        <input type="date" v-model="endDate">
+        <input type="text" v-model="address" placeholder="Address">
+        <input type="number" v-model="numRooms" placeholder="Number of Rooms">
+        <input type="url" v-model="photoURL" placeholder="Photo URL">
+        <input type="number" v-model="distanceToCampus" placeholder="Distance to Campus (miles)">
+
         <button @click.native="addListing()">Add Listing</button>
+        <button @click.native="this.$emit('toggle-add-listing-view')">Cancel</button>
     </div>
 </template>
 
@@ -22,7 +30,15 @@ export default {
     name: "AddListingView",
     data: () => ({
         name: '',
-        selectedUser: ''
+        selectedUser: '',
+        rent: Number,
+        startDate: Date,
+        endDate: Date,
+        address: '',
+        numRooms: Number,
+        photoURL: '',
+        distanceToCampus: Number,
+        id: String
     }),
     props: {
         users: Array
@@ -31,12 +47,27 @@ export default {
         addListing() {
             axios.post('http://localhost:3030/api/listings', {
                 name: this.name,
-                userID: this.selectedUser._id
+                user: this.selectedUser._id,
+                rent: this.rent,
+                startDate: this.startDate,
+                endDate: this.endDate,
+                address: this.address,
+                numRooms: this.numRooms,
+                photoURL: this.photoURL,
+                distanceToCampus: this.distanceToCampus
             }).then(response => {
                 console.log(response.data);
+                this.id = response.data._id;
                 this.$emit('toggle-add-listing-view');
                 console.log('Sent toggle-add-listing-view');
             });
+
+            axios.put('http://localhost:3030/api/users/' + this.selectedUser._id, {
+                listing: this.id
+            }).then(response => {
+                console.log('Added listing ID to user')
+            });
+
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="listing-card">
         <h4>{{ name }}</h4>
-        <p v-if="userFirstName != null && userFirstName != ''">User: {{ userFirstName }} {{ userLastName }}</p>
+        <p v-if="userFirstName != null && userFirstName != ''">{{ userFirstName }} {{ userLastName }}</p>
     </div>
 </template>
 
@@ -14,22 +14,22 @@ export default {
     name: "ListingCard",
     props: {
         name: String,
-        userID: String
+        user: String
     },
     data: () => ({
         userFirstName: '',
         userLastName: ''
     }),
     methods: {
-        getUserInfo(userID) {
-            axios.get('http://localhost:3030/api/users/' + userID).then(response => {
+        getUserInfo(user) {
+            axios.get('http://localhost:3030/api/users/' + user).then(response => {
                 this.userFirstName = response.data.firstName;
                 this.userLastName = response.data.lastName;
             });
         }
     },
     mounted() {
-        this.getUserInfo(this.userID);
+        this.getUserInfo(this.user);
     }
 }
 </script>
