@@ -1,6 +1,6 @@
 <template>
     <div class="listing-card">
-        <h3>{{ name }}</h3>
+        <h4>{{ name }}</h4>
         <p v-if="userFirstName != null && userFirstName != ''">User: {{ userFirstName }} {{ userLastName }}</p>
     </div>
 </template>

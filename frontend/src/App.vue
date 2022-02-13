@@ -5,12 +5,13 @@
     <Header @toggle-add-listing-view="isShowingAddListingView = true; isShowingAddUserView = false; getAllUsers()" 
             @toggle-add-user-view="isShowingAddUserView = true; isShowingAddListingView = false"></Header>
     
+
+    <AddUserView @toggle-add-user-view="isShowingAddUserView = false" v-show="isShowingAddUserView"></AddUserView>
+
+    <AddListingView :users="allUsers" @toggle-add-listing-view="isShowingAddListingView = false" v-show="isShowingAddListingView"></AddListingView>
+      
     <div class="content column">
 
-      <AddUserView @toggle-add-user-view="isShowingAddUserView = false" v-show="isShowingAddUserView"></AddUserView>
-
-      <AddListingView :users="allUsers" @toggle-add-listing-view="isShowingAddListingView = false" v-show="isShowingAddListingView"></AddListingView>
-      
       <h2 class="row">All Users:</h2>
       <div class="row user-grid">
         <UserCard @reload-users="getAllUsers()" v-for="user in allUsers" :key="user._id" :firstName="user.firstName" :lastName="user.lastName" :userID="user._id"></UserCard>
@@ -83,8 +84,9 @@ export default {
 
 .content {
   position: relative;
-  top: 5rem;
+  top: 3rem;
   z-index: 1;
+  padding: 1rem;
 }
 
 /* Flex Classes */

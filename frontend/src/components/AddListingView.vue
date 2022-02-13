@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="add-listing-view">
         <h2>Add Listing:</h2>
         <input type="text" v-model="name" placeholder="Name"> 
         <input type="text" placeholder="Address">
@@ -9,6 +9,7 @@
             </option>
         </select>
 
+        <button @click.native="this.$emit('toggle-add-listing-view')">Cancel</button>
         <button @click.native="addListing()">Add Listing</button>
     </div>
 </template>
@@ -43,7 +44,25 @@ export default {
 </script>
 
 <style scoped>
-    * {
+    .add-listing-view * {
         margin: 0.5rem;;
+    }
+
+    .add-listing-view {
+        top: 6rem;
+
+        position: fixed;
+        height: 20rem;
+        background-color: rgb(212, 212, 212);
+        z-index: 2;
+        padding: 2rem;
+        border-radius: 2rem;
+        border-style: solid;
+        border-color: gray;
+
+        margin-left: 6rem;
+
+        width: 450px;
+        height: 300px;
     }
 </style>
