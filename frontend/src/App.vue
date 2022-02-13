@@ -21,7 +21,7 @@
 
       <h2>All Listings:</h2>
       <div class="row user-grid">
-        <ListingCard v-for="listing in allListings" :key="listing._id" :name="listing.name" :userID="listing.userID"></ListingCard>
+        <ListingCard v-for="listing in allListings" :key="listing._id" :name="listing.name" :user="listing.user"></ListingCard>
       </div>
 
       <button style="margin-top: 2rem;" @click.native="getAllListings()">Get All Listings</button>

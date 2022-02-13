@@ -3,8 +3,17 @@
         <h2>Add User:</h2>
         <input type="text" v-model="firstName" placeholder="First Name">
         <input type="text" v-model="lastName" placeholder="Last Name">
-        <button @click.native="this.$emit('toggle-add-user-view')">Cancel</button>
+        <input type="email" v-model="email" placeholder="Email">
+
+        <select v-model="schoolYear" name="schoolYear">
+            <option value="1">First Year</option>
+            <option value="2">Second Year</option>
+            <option value="3">Third Year</option>
+            <option value="4">Fourth Year</option>
+            <option value="5">Fifth Year</option>
+        </select>
         <button @click.native="addUser()">Add User</button>
+        <button @click.native="this.$emit('toggle-add-user-view')">Cancel</button>    
     </div>
 </template>
 
@@ -16,18 +25,27 @@ export default {
     name: "AddUserView",
     data: () => ({
         firstName: '',
-        lastName: ''
+        lastName: '',
+        email: '',
+        schoolYear: Number
     }),
     methods: {
         addUser() {
             axios.post('http://localhost:3030/api/users', {
                 firstName: this.firstName,
-                lastName: this.lastName
+                lastName: this.lastName,
+                email: this.email,
+                schoolYear: this.schoolYear
             }).then(response => {
                 this.$emit('toggle-add-user-view');
                 console.log(response.data);
                 console.log('Sent toggle-add-user-view');
             });
+
+            this.firstName = '';
+            this.lastName = '';
+            this.email = '';
+            this.schoolYear = Number;
         }
     }
 }
