@@ -58,7 +58,13 @@ exports.create_user = (req, res) => {
 exports.update_user = (req, res) => {
     console.log('PUT to /api/users/ID');
 
-    userModel.findByIdAndUpdate(req.params.id, { firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email, schoolYear: req.body.schoolYear }, (err) => {
+    userModel.findByIdAndUpdate(req.params.id, { 
+        firstName: req.body.firstName, 
+        lastName: req.body.lastName, 
+        email: req.body.email, 
+        schoolYear: req.body.schoolYear, 
+        $push:{ 'listings' : req.body.listing }
+    }, (err) => {
         if (err) {
             res.send('Error updating user');
             console.log('Error updating user');

@@ -37,7 +37,8 @@ export default {
         address: '',
         numRooms: Number,
         photoURL: '',
-        distanceToCampus: Number
+        distanceToCampus: Number,
+        id: String
     }),
     props: {
         users: Array
@@ -56,9 +57,17 @@ export default {
                 distanceToCampus: this.distanceToCampus
             }).then(response => {
                 console.log(response.data);
+                this.id = response.data._id;
                 this.$emit('toggle-add-listing-view');
                 console.log('Sent toggle-add-listing-view');
             });
+
+            axios.put('http://localhost:3030/api/users/' + this.selectedUser._id, {
+                listing: this.id
+            }).then(response => {
+                console.log('Added listing ID to user')
+            });
+
         }
     }
 }
