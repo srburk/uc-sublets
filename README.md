@@ -1,6 +1,12 @@
 
 # uc-sublets
 
-To start api use command 'yarn devstart'
+Personal project made using Vue.js frontend and Node.js backend. Make for UC students looking for sublets in their semesters off co-op.
 
-To start frontend, use command 'yarn serve'
+### Backend
+To start api use command `yarn devstart`
+
+### Frontend
+
+To start frontend, use command `yarn serve`
+To build frontend for production, use `yarn build`
