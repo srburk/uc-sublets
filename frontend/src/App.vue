@@ -16,8 +16,14 @@
         <UserCard @reload-users="getAllUsers()" v-for="user in allUsers" :key="user._id" :firstName="user.firstName" :lastName="user.lastName" :userID="user._id"></UserCard>
       </div>
 
-      <button style="margin: 15rem; margin-top: 2rem;" @click.native="getAllUsers()">Get All Users</button>
+      <button style="margin-top: 2rem;" @click.native="getAllUsers()">Get All Users</button>
 
+      <h2>All Listings:</h2>
+      <div class="row user-grid">
+        <ListingCard v-for="listing in allListings" :key="listing._id" :name="listing.name" :userID="listing.userID"></ListingCard>
+      </div>
+
+      <button style="margin-top: 2rem;" @click.native="getAllListings()">Get All Listings</button>
     </div>
     
   </div>
@@ -31,6 +37,7 @@ import Header from './components/Header.vue'
 import AddUserView from './components/AddUserView.vue'
 import AddListingView from './components/AddListingView.vue'
 import UserCard from './components/UserCard.vue'
+import ListingCard from './components/ListingCard.vue'
 
 // other imports
 import axios from 'axios';
@@ -41,18 +48,26 @@ export default {
     Header,
     AddUserView,
     AddListingView,
-    UserCard
+    UserCard,
+    ListingCard
   },
   data: () => ({
     isShowingAddUserView: false,
     isShowingAddListingView: false,
-    allUsers: []
+    allUsers: [],
+    allListings: []
   }),
   methods: {
     getAllUsers() {
       axios.get('http://localhost:3030/api/users').then(response => {
         console.log(response.data);
         this.allUsers = response.data;
+      });
+    },
+    getAllListings() {
+      axios.get('http://localhost:3030/api/listings').then(response => {
+        console.log(response.data);
+        this.allListings = response.data;
       });
     }
   }
