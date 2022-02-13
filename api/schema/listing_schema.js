@@ -7,10 +7,36 @@ const listingSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    userID: {
+    user: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user',
         required: true
+    },
+    rent: {
+        type: Number,
+        required: true
+    },
+    startDate: {
+        type: Date,
+        required: true
+    },
+    endDate: {
+        type: Date,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    numRooms: {
+        type: Number,
+        required: true
+    },
+    photoURL: {
+        type: String
+    },
+    distanceToCampus: {
+        type: Number
     }
 });
 

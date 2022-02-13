@@ -37,9 +37,18 @@ exports.create_listing = (req, res) => {
     console.log('POST to /api/listings');
 
     let newListing = new listingModel;
+    
     newListing._id = mongoose.Types.ObjectId();
     newListing.name = req.body.name;
-    newListing.userID = req.body.userID;
+    newListing.user = req.body.user;
+    newListing.rent = req.body.rent;
+    newListing.startDate = req.body.startDate;
+    newListing.endDate = req.body.endDate;
+    newListing.address = req.body.address;
+    newListing.numRooms = req.body.numRooms;
+    newListing.photoURL = req.body.photoURL;
+    newListing.distanceToCampus = req.body.distanceToCampus;
+
     console.log(newListing);
     newListing.save((err) => {
         if (err) {
@@ -55,7 +64,7 @@ exports.create_listing = (req, res) => {
 exports.update_listing = (req, res) => {
     console.log('PUT to /api/listings/ID');
 
-    listingModel.findByIdAndUpdate(req.params.id, { name: req.body.name, userID: req.body.userID }, (err) => {
+    listingModel.findByIdAndUpdate(req.params.id, { name: req.body.name, user: req.body.user }, (err) => {
         if (err) {
             res.send('Error finding listing by ID');
             console.log('Error finding listing by ID');
