@@ -31,7 +31,7 @@ export default {
     }),
     methods: {
         addUser() {
-            axios.post('http://localhost:3030/api/users', {
+            axios.post('http://' + window.location.hostname + ':3030/api/users/', {
                 firstName: this.firstName,
                 lastName: this.lastName,
                 email: this.email,

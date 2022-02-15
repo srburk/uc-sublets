@@ -17,8 +17,6 @@
 
 import axios from 'axios'
 
-// const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
 export default {
 
     name: "ListingCard",
@@ -35,13 +33,18 @@ export default {
     }),
     methods: {
         getUserInfo(user) {
-            axios.get('http://localhost:3030/api/users/' + user).then(response => {
+            axios.get('http://' + window.location.hostname + ':3030/api/users/' + user).then(response => {
                 this.userFirstName = response.data.firstName;
                 this.userLastName = response.data.lastName;
             });
+        },
+        deleteListing(listing) {
+            axios.delete('http://' + window.location.hostname + ':3030/api/listings/' + listing).then(response => {
+                console.log('Deleted listing')
+                this.$emit('load-listings')
+            });
         }
     },
-    // MONTH_NAMES: monthNames,
     mounted() {
         this.getUserInfo(this.listing.user);
         this.convertedStartDate = new Date(this.listing.startDate);
@@ -73,7 +76,8 @@ export default {
 
     .address {
         font-weight: 550;
-        color: rgb(114, 114, 241);
+        /* color: rgb(114, 114, 241); */
+        color: rgb(212, 71, 71);
         text-decoration: none;
     }
 
@@ -101,6 +105,10 @@ export default {
         border-radius: 12px;
     }
 
+    .picture:hover {
+        background-color: rgb(235, 235, 235);
+    }
+
     .month {
         color: black;
         /* padding: 0.35rem; */
@@ -108,8 +116,8 @@ export default {
         border-width: 0.1rem;
         border-color: rgb(175, 175, 175);
         border-radius: 8px;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
         /* font-weight: 550; */
     }
 

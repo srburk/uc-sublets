@@ -14,6 +14,7 @@
 
       <ListingsGallery :allListings="this.allListings" @load-listings="getAllListings()"></ListingsGallery>
 
+      <!-- <p>{{ this.window.location.host }}</p> -->
       <!-- <h2 class="row">All Users:</h2>
       <div class="row user-grid">
         <UserCard @reload-users="getAllUsers()" v-for="user in allUsers" :key="user._id" :firstName="user.firstName" :lastName="user.lastName" :userID="user._id"></UserCard>
@@ -53,7 +54,6 @@ export default {
     AddUserView,
     AddListingView,
     UserCard,
-    // ListingCard,
     ListingsGallery
   },
   data: () => ({
@@ -64,13 +64,13 @@ export default {
   }),
   methods: {
     getAllUsers() {
-      axios.get('http://localhost:3030/api/users').then(response => {
+      axios.get('http://' + window.location.hostname + ':3030/api/users/').then(response => {
         console.log(response.data);
         this.allUsers = response.data;
       });
     },
     getAllListings() {
-      axios.get('http://localhost:3030/api/listings').then(response => {
+      axios.get('http://' + window.location.hostname + ':3030/api/listings/').then(response => {
         console.log(response.data);
         this.allListings = response.data;
       });

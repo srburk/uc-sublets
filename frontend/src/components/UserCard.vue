@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         deleteUser(userID) {
-            axios.delete('http://localhost:3030/api/users/' + userID).then(response => {
+            axios.delete('http://' + window.location.hostname + ':3030/api/users/' + userID).then(response => {
                 console.log(response.data);
                 this.$emit('reload-users');
             });
