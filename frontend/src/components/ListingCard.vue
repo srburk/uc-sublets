@@ -1,18 +1,23 @@
 <template>
-    <div class="listing-card">
-        <h3 class="name">{{ listing.name }}</h3>
-        <a class="address" href="#">{{ listing.address }}</a>
-        <div class="row listing-card-info-bar">
+    <div class="listing-card column">
+        <div class="picture"></div>
+        <div class="listing-card-info">
+            <h3 class="name">{{ listing.name }}</h3>
+            <p><a class="address" href="#">{{ listing.address }}</a><span class="distance-to-campus" v-if="listing.distanceToCampus"> · {{ listing.distanceToCampus }} mi to campus</span></p>
+            <span class="month">
+                {{ convertedStartDate.toLocaleString('en-us', { year: 'numeric', month: 'short' }) }}
+                    – {{ convertedEndDate.toLocaleString('en-us', { year: 'numeric', month: 'short' })}}
+            </span>
             <p><b>${{ listing.rent }}</b> / month · {{ listing.numRooms }} Bedrooms</p>
-            <a class="user" href="#"> {{ userFirstName }} {{ userLastName }}</a>
         </div>
-        <p class="distance-to-campus" v-if="listing.distanceToCampus">{{ listing.distanceToCampus }} miles from campus</p>
     </div>
 </template>
 
 <script>
 
 import axios from 'axios'
+
+// const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 export default {
 
@@ -24,7 +29,9 @@ export default {
     },
     data: () => ({
         userFirstName: '',
-        userLastName: ''
+        userLastName: '',
+        convertedStartDate: Date,
+        convertedEndDate: Date
     }),
     methods: {
         getUserInfo(user) {
@@ -34,8 +41,11 @@ export default {
             });
         }
     },
+    // MONTH_NAMES: monthNames,
     mounted() {
         this.getUserInfo(this.listing.user);
+        this.convertedStartDate = new Date(this.listing.startDate);
+        this.convertedEndDate = new Date(this.listing.endDate);
     }
 }
 </script>
@@ -43,25 +53,22 @@ export default {
 <style scoped>
     .listing-card {
         display: block;
-        margin: 0.5rem;
-        padding: 0.75rem;
-        padding-left: 1.5rem;
-        border-radius: 12px;
-        background-color: rgb(209, 209, 209);
+        margin: 0.25rem;
+        /* padding: 0.75rem; */
+        /* padding-left: 1.5rem; */
+        /* border-radius: 12px;
+        background-color: rgb(209, 209, 209); */
+        max-width: 25rem;
         font-weight: 500;
     }
 
-    .listing-card:hover {
-        background-color: rgb(201, 201, 201);
-    }
-
     .listing-card * {
-        margin-top: 0.25rem;
-        margin-bottom: 0.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
-    .listing-card-info-bar {
-        justify-content: space-between;
+    .listing-card-info {
+        margin-top: 0.75rem;
     }
 
     .address {
@@ -86,6 +93,24 @@ export default {
 
     .user:hover {
         text-decoration: underline;
+    }
+
+    .picture {
+        background-color: rgb(219, 219, 219);
+        min-height: 13rem;
+        border-radius: 12px;
+    }
+
+    .month {
+        color: black;
+        /* padding: 0.35rem; */
+        border-style: solid;
+        border-width: 0.1rem;
+        border-color: rgb(175, 175, 175);
+        border-radius: 8px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        /* font-weight: 550; */
     }
 
 </style>
