@@ -13,11 +13,13 @@ router.post('/', listingController.create_listing);
 
 router.get('/', listingController.list_listings);
 
-router.get('/:id', listingController.find_listing);
+router.get('/query/:id', listingController.find_listing);
+
+router.get('/query', listingController.search_listings);
 
 router.put('/:id', listingController.update_listing);
 
-router.delete('/:id', listingController.delete_user);
+router.delete('/:id', listingController.delete_listing);
 
 // exports
 module.exports = router;

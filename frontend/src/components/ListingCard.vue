@@ -32,12 +32,6 @@ export default {
         convertedEndDate: Date
     }),
     methods: {
-        getUserInfo(user) {
-            axios.get('http://' + window.location.hostname + ':3030/api/users/' + user).then(response => {
-                this.userFirstName = response.data.firstName;
-                this.userLastName = response.data.lastName;
-            });
-        },
         deleteListing(listing) {
             axios.delete('http://' + window.location.hostname + ':3030/api/listings/' + listing).then(response => {
                 console.log('Deleted listing')
