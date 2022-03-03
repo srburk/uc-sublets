@@ -55,14 +55,34 @@ export default {
 
 <style scoped>
     .listing-card {
-        display: block;
-        margin: 0.25rem;
+        /* display: block; */
+        /* margin: 0.25rem; */
+        margin-left: 15%;
+        margin-right: 15%;
         /* padding: 0.75rem; */
-        /* padding-left: 1.5rem; */
-        /* border-radius: 12px;
-        background-color: rgb(209, 209, 209); */
-        max-width: 25rem;
+        /* max-width: 25rem; */
         font-weight: 500;
+        justify-content: center;
+        /* max-width: 50rem; */
+        /* align-self: center; */
+    }
+
+    .picture {
+        background-color: rgb(219, 219, 219);
+        min-height: 20rem;
+        border-radius: 12px;
+        max-width: 50rem;
+    }
+
+    /* Small screens */
+    @media all and (max-width: 650px) {
+        .listing-card {
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+        .picture {
+            min-height: 18rem;
+        }
     }
 
     .listing-card * {
@@ -70,9 +90,9 @@ export default {
         margin-bottom: 0.5rem;
     }
 
-    .listing-card-info {
-        margin-top: 0.75rem;
-    }
+    /* .listing-card-info {
+        margin-top: 0.5rem;
+    } */
 
     .address {
         font-weight: 550;
@@ -97,12 +117,6 @@ export default {
 
     .user:hover {
         text-decoration: underline;
-    }
-
-    .picture {
-        background-color: rgb(219, 219, 219);
-        min-height: 13rem;
-        border-radius: 12px;
     }
 
     .picture:hover {

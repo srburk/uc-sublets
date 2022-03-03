@@ -7,7 +7,7 @@
                 <a @click.native="this.$emit('load-listings')" href="#">Refresh</a>
             </div>
         </div>
-        <ListingCard v-for="listing in allListings" :key="listing._id" :listing="listing" @load-listings="this.$emit('load-listings')"></ListingCard>
+        <ListingCard class="ListingCard" v-for="listing in allListings" :key="listing._id" :listing="listing" @load-listings="this.$emit('load-listings')"></ListingCard>
     </div>
 </template>
 
@@ -41,4 +41,6 @@ export default {
     .listings-header * {
         margin-top: 1rem;
     }
+
+    
 </style>
