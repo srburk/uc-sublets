@@ -17,7 +17,7 @@ router.get('/:id', listingController.find_listing);
 
 router.put('/:id', listingController.update_listing);
 
-router.delete(':id', listingController.delete_user);
+router.delete('/:id', listingController.delete_user);
 
 // exports
 module.exports = router;

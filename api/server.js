@@ -4,13 +4,18 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const port = 3030;
 
+// use it before all route definitions
+app.use(cors({origin: 'http://localhost:8080'}));
+
 // routers
 const userRoutes = require('./routes/users.route');
 const listingRoutes = require('./routes/listings.route');
+const { constants } = require('http2');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

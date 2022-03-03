@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         addListing() {
-            axios.post('http://localhost:3030/api/listings', {
+            axios.post('http://' + window.location.hostname + ':3030/api/listings/', {
                 name: this.name,
                 user: this.selectedUser._id,
                 rent: this.rent,
@@ -62,7 +62,7 @@ export default {
                 console.log('Sent toggle-add-listing-view');
             });
 
-            axios.put('http://localhost:3030/api/users/' + this.selectedUser._id, {
+            axios.put('http://' + window.location.hostname + ':3030/api/users/' + this.selectedUser._id, {
                 listing: this.id
             }).then(response => {
                 console.log('Added listing ID to user')
