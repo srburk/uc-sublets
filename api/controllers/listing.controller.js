@@ -53,7 +53,7 @@ exports.search_listings = (req, res) => {
 
     // query builder
 
-    let query = listingModel.find();
+    let query = listingModel.find({});
 
     if (req.query.user) {
         query.where('user').equals(req.query.user);
@@ -61,15 +61,15 @@ exports.search_listings = (req, res) => {
     }
 
     if (req.query.minRent && req.query.maxRent) {
-        query.where('rent').gt(req.query.minRent).lt(req.query.maxRent);
+        query.where('rent').gte(req.query.minRent).lte(req.query.maxRent);
     }
 
     if (req.query.distanceToCampus) {
-        query.where('distanceToCampus').lt(req.query.distanceToCampus);
+        query.where('distanceToCampus').lte(req.query.distanceToCampus);
     }
 
     if (req.query.numRooms) {
-        query.where('numRooms').equals(req.query.numRooms);
+        query.where('numRooms').lte(req.query.numRooms);
     }
 
     query.limit(10);
