@@ -34,6 +34,7 @@ export default {
     width: 100%;
     background-color: rgb(212, 71, 71);
     overflow: hidden;
+    z-index: 2;
 }
 
 /* Large Screens */

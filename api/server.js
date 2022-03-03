@@ -4,12 +4,18 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
-const  app = express();
+const app = express();
 const port = 3030;
 
-// schema
-let userModel = require('./schema/user_schema');
+// use it before all route definitions
+app.use(cors({origin: 'http://localhost:8080'}));
+
+// routers
+const userRoutes = require('./routes/users.route');
+const listingRoutes = require('./routes/listings.route');
+const { constants } = require('http2');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,42 +33,9 @@ db.on('error', (error) => {
 });
 
 // routes
-app.post('/api/users', (req, res) => {
-    console.log('POST to /api/users');
-    let newUser = new userModel;
-    newUser.firstName = req.body.firstName;
-    newUser.lastName = req.body.lastName;
-    console.log(newUser);
-    newUser.save((err) => {
-        if (err) {
-            res.send('Error adding new user');
-            console.log('Error adding new user')
-        } else {
-            res.send(newUser);
-            console.log('Added new user')
-        }
-    });
-});
-
-app.get('/api/users', (req, res) => {
-    console.log('GET to /api/users');
-    userModel.find({ }, (err, users) => {
-        if (err) {
-            res.send('Error fetching users');
-            console.log('Error fetching users');
-        } else {
-            res.json(users);
-            console.log(users);
-        }
-    });
-});
-
-app.get('/', (req, res) => {
-    // res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-    res.send('Success!');
-    console.log('Get')
-});
+app.use('/api/users', userRoutes);
+app.use('/api/listings', listingRoutes);
 
 app.listen(port, () => {
-    console.log('🌍 Server listening on port ', port);
+    console.log('🌍 Server listening on port:', port);
 });
