@@ -13,9 +13,9 @@ router.post('/', listingController.create_listing);
 
 router.get('/', listingController.list_listings);
 
-router.get('/query/:id', listingController.find_listing);
+router.get('/search/:id', listingController.find_listing);
 
-router.get('/query', listingController.search_listings);
+router.get('/search', listingController.search_listings);
 
 router.put('/:id', listingController.update_listing);
 

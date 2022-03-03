@@ -55,21 +55,21 @@ exports.search_listings = (req, res) => {
 
     let query = listingModel.find();
 
-    if (req.body.user) {
-        query.where('user').equals(req.body.user);
-        console.log(req.body.user);
+    if (req.query.user) {
+        query.where('user').equals(req.query.user);
+        console.log(req.query.user);
     }
 
-    if (req.body.minRent && req.body.maxRent) {
-        query.where('rent').gt(req.body.minRent).lt(req.body.maxRent);
+    if (req.query.minRent && req.query.maxRent) {
+        query.where('rent').gt(req.query.minRent).lt(req.query.maxRent);
     }
 
-    if (req.body.distanceToCampus) {
-        query.where('distanceToCampus').lt(req.body.distanceToCampus);
+    if (req.query.distanceToCampus) {
+        query.where('distanceToCampus').lt(req.query.distanceToCampus);
     }
 
-    if (req.body.numRooms) {
-        query.where('numRooms').equals(req.body.numRooms);
+    if (req.query.numRooms) {
+        query.where('numRooms').equals(req.query.numRooms);
     }
 
     query.limit(10);

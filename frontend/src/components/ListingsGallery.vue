@@ -42,9 +42,10 @@ export default {
     },
     methods: {
         searchListings(query) {
-            console.log(query.user._id);
-            axios.get('http://' + window.location.hostname + ':3030/api/listings/query', {
-                user: query.user
+            axios.get('http://' + window.location.hostname + ':3030/api/listings/search', {
+                params: {
+                    user: query.user._id
+                }
             }).then(response => {
                 console.log(response.data)
                 this.listings = response.data;
