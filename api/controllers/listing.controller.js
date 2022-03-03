@@ -44,6 +44,7 @@ exports.search_listings = (req, res) => {
     MaxRent: INT
     MinDistance: INT
     NumRooms: INT
+    availibility
     */
 
     // TODO: Populate user
@@ -56,6 +57,7 @@ exports.search_listings = (req, res) => {
 
     if (req.body.user) {
         query.where('user').equals(req.body.user);
+        console.log(req.body.user);
     }
 
     if (req.body.minRent && req.body.maxRent) {

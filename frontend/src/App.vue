@@ -12,7 +12,7 @@
       
     <div class="content column">
 
-      <ListingsGallery :allListings="this.allListings" @load-listings="getAllListings()"></ListingsGallery>
+      <ListingsGallery :allListings="this.allListings" @load-listings="getAllListings(); getAllUsers()" :users="allUsers"></ListingsGallery>
 
       <!-- <p>{{ this.window.location.host }}</p> -->
       <!-- <h2 class="row">All Users:</h2>
@@ -60,7 +60,12 @@ export default {
     isShowingAddUserView: false,
     isShowingAddListingView: false,
     allUsers: [],
-    allListings: []
+    allListings: [],
+    listingQuery: {
+      name: '',
+      minRent: Number,
+      maxRent: Number
+    }
   }),
   methods: {
     getAllUsers() {
@@ -74,7 +79,7 @@ export default {
         console.log(response.data);
         this.allListings = response.data;
       });
-    }
+    },
   }
 }
 </script>

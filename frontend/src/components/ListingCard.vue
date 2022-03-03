@@ -40,7 +40,7 @@ export default {
         }
     },
     mounted() {
-        this.getUserInfo(this.listing.user);
+        // this.getUserInfo(this.listing.user);
         this.convertedStartDate = new Date(this.listing.startDate);
         this.convertedEndDate = new Date(this.listing.endDate);
     }
