@@ -1,8 +1,8 @@
 <template>
     <div class="header">
         <div class="header-container row">
-            <a href="#">View Users</a>
-            <a href="#">View Listings</a>
+            <!-- <a href="#">View Users</a>
+            <a href="#">View Listings</a> -->
             <button @click.native="toggleAddUserView()" class="new-user-btn">Add User</button>
             <button @click.native="toggleAddListingView()" class="new-listing-btn">Add Listing</button>
         </div>
