@@ -10,3 +10,7 @@ To start api use command `yarn devstart`
 
 To start frontend, use command `yarn serve`
 To build frontend for production, use `yarn build`
+
+### Database
+
+Use your zsh alias 'mongo-start' and 'mongo-stop' running brew services
