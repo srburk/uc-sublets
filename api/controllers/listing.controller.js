@@ -1,10 +1,11 @@
 
 // imports 
-const e = require('express');
 const mongoose = require('mongoose');
 const listingModel = require('../schema/listing_schema');
 
 // exports
+
+// returns 1 listing
 exports.list_listings = (req, res) => {
     console.log('GET to /api/listings');
 
@@ -19,6 +20,7 @@ exports.list_listings = (req, res) => {
     });
 };
 
+// returns 1 listing by ID
 exports.find_listing = (req, res) => {
     console.log('GET to /api/listings/ID');
 
@@ -31,6 +33,56 @@ exports.find_listing = (req, res) => {
             console.log(listing);
         }
     });
+};
+
+// executes search query
+exports.search_listings = (req, res) => {
+    /*
+    Structure of request:
+    user: "UserID"
+    MinRent: INT
+    MaxRent: INT
+    MinDistance: INT
+    NumRooms: INT
+    availibility
+    */
+
+    // TODO: Populate user
+
+    console.log('GET to /api/listings/query');
+
+    // query builder
+
+    let query = listingModel.find({});
+
+    if (req.query.user) {
+        query.where('user').equals(req.query.user);
+        console.log(req.query.user);
+    }
+
+    if (req.query.minRent && req.query.maxRent) {
+        query.where('rent').gte(req.query.minRent).lte(req.query.maxRent);
+    }
+
+    if (req.query.distanceToCampus) {
+        query.where('distanceToCampus').lte(req.query.distanceToCampus);
+    }
+
+    if (req.query.numRooms) {
+        query.where('numRooms').lte(req.query.numRooms);
+    }
+
+    query.limit(10);
+    
+    query.exec((err, listings) => {
+        if (err) {
+            res.send('Error finding listings by query');
+            console.log('Error finding listings by query');
+        } else {
+            res.json(listings);
+            console.log(listings);
+        }
+    })
 };
 
 exports.create_listing = (req, res) => {
@@ -75,7 +127,7 @@ exports.update_listing = (req, res) => {
     });
 }
 
-exports.delete_user = (req, res) => {
+exports.delete_listing = (req, res) => {
 
     console.log('DELETE to /api/listings/ID');
 

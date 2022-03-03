@@ -1,10 +1,12 @@
 <template>
     <div class="header">
         <div class="header-container row">
-            <!-- <a href="#">View Users</a>
-            <a href="#">View Listings</a> -->
+
+            <a href="#">Sign Up</a>
+            <a href="#">Log In</a>
+ 
             <button @click.native="toggleAddUserView()" class="new-user-btn">Add User</button>
-            <button @click.native="toggleAddListingView()" class="new-listing-btn">Add Listing</button>
+            <button @click.native="toggleAddListingView()" class="new-listing-btn">New Listing</button>
         </div>
     </div>
 </template>
@@ -62,18 +64,20 @@ export default {
     color: black;
 }
 
-.new-user-btn, .new-listing-btn {
+.new-listing-btn {
     color: black;
     background-color: white;
     border: none;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 100px;
+    min-width: 9rem;
     padding: 0.5rem;
     margin-top: 0.75rem;
 }
 
 .new-user-btn:hover, .new-listing-btn:hover {
-    background-color: rgb(165, 165, 165);
+    /* background-color: rgb(165, 165, 165); */
+    background-color: black;
     color: white;
 }
 

@@ -12,22 +12,8 @@
       
     <div class="content column">
 
-      <ListingsGallery :allListings="this.allListings" @load-listings="getAllListings()"></ListingsGallery>
+      <ListingsGallery :users="allUsers"></ListingsGallery>
 
-      <!-- <p>{{ this.window.location.host }}</p> -->
-      <!-- <h2 class="row">All Users:</h2>
-      <div class="row user-grid">
-        <UserCard @reload-users="getAllUsers()" v-for="user in allUsers" :key="user._id" :firstName="user.firstName" :lastName="user.lastName" :userID="user._id"></UserCard>
-      </div>
-
-      <button style="margin-top: 2rem;" @click.native="getAllUsers()">Get All Users</button>
-
-      <h2>All Listings:</h2>
-      <div class="row user-grid">
-        <ListingCard v-for="listing in allListings" :key="listing._id" :name="listing.name" :user="listing.user"></ListingCard>
-      </div>
-
-      <button style="margin-top: 2rem;" @click.native="getAllListings()">Get All Listings</button> -->
     </div>
     
   </div>
@@ -41,7 +27,6 @@ import Header from './components/Header.vue'
 import AddUserView from './components/AddUserView.vue'
 import AddListingView from './components/AddListingView.vue'
 import UserCard from './components/UserCard.vue'
-// import ListingCard from './components/ListingCard.vue'
 import ListingsGallery from './components/ListingsGallery.vue'
 
 // other imports
@@ -60,7 +45,7 @@ export default {
     isShowingAddUserView: false,
     isShowingAddListingView: false,
     allUsers: [],
-    allListings: []
+    // allListings: []
   }),
   methods: {
     getAllUsers() {
@@ -68,13 +53,13 @@ export default {
         console.log(response.data);
         this.allUsers = response.data;
       });
-    },
-    getAllListings() {
-      axios.get('http://' + window.location.hostname + ':3030/api/listings/').then(response => {
-        console.log(response.data);
-        this.allListings = response.data;
-      });
     }
+    // getAllListings() {
+    //   axios.get('http://' + window.location.hostname + ':3030/api/listings/').then(response => {
+    //     console.log(response.data);
+    //     this.allListings = response.data;
+    //   });
+    // },
   }
 }
 </script>

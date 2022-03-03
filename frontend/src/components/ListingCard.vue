@@ -23,7 +23,6 @@ export default {
     props: {
         name: String,
         listing: JSON
-        // user: String,
     },
     data: () => ({
         userFirstName: '',
@@ -32,21 +31,13 @@ export default {
         convertedEndDate: Date
     }),
     methods: {
-        getUserInfo(user) {
-            axios.get('http://' + window.location.hostname + ':3030/api/users/' + user).then(response => {
-                this.userFirstName = response.data.firstName;
-                this.userLastName = response.data.lastName;
-            });
-        },
         deleteListing(listing) {
             axios.delete('http://' + window.location.hostname + ':3030/api/listings/' + listing).then(response => {
                 console.log('Deleted listing')
-                this.$emit('load-listings')
             });
         }
     },
     mounted() {
-        this.getUserInfo(this.listing.user);
         this.convertedStartDate = new Date(this.listing.startDate);
         this.convertedEndDate = new Date(this.listing.endDate);
     }
@@ -55,16 +46,10 @@ export default {
 
 <style scoped>
     .listing-card {
-        /* display: block; */
-        /* margin: 0.25rem; */
         margin-left: 15%;
         margin-right: 15%;
-        /* padding: 0.75rem; */
-        /* max-width: 25rem; */
         font-weight: 500;
         justify-content: center;
-        /* max-width: 50rem; */
-        /* align-self: center; */
     }
 
     .picture {
@@ -89,10 +74,6 @@ export default {
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
     }
-
-    /* .listing-card-info {
-        margin-top: 0.5rem;
-    } */
 
     .address {
         font-weight: 550;
@@ -125,14 +106,12 @@ export default {
 
     .month {
         color: black;
-        /* padding: 0.35rem; */
         border-style: solid;
         border-width: 0.1rem;
         border-color: rgb(175, 175, 175);
         border-radius: 8px;
         padding-left: 0.75rem;
         padding-right: 0.75rem;
-        /* font-weight: 550; */
     }
 
 </style>
