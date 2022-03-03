@@ -15,7 +15,7 @@
                 <a @click.native="this.listingQuery = {user: String, minRent: Number, maxRent: Number, numRooms: Number}; this.searchListings(listingQuery)" href="#">Clear</a>
             </div>
         </div>
-        <ListingCard class="ListingCard" v-for="listing in listings" :key="listing._id" :listing="listing" @load-listings="this.$emit('load-listings')"></ListingCard>
+        <ListingCard class="ListingCard" v-for="listing in listings" :key="listing._id" :listing="listing"></ListingCard>
     </div>
 </template>
 
@@ -39,7 +39,6 @@ export default {
         ListingCard
     },
     props: {
-        allListings: Array,
         users: Array
     },
     methods: {
@@ -52,14 +51,11 @@ export default {
                     ...(query.numRooms != Number ? {numRooms: query.numRooms} : {}),
                 }
             }).then(response => {
-                // console.log(response.data)
                 this.listings = response.data;
             });
         }
     },
     mounted() {
-        this.$emit('load-listings');
-        this.listings = this.allListings;
         this.searchListings(this.listingQuery);
     }
 }
