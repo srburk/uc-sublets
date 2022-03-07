@@ -2,7 +2,15 @@
 
   <div id="app">
 
-    <Header @toggle-add-listing-view="isShowingAddListingView = true; isShowingAddUserView = false; getAllUsers()" 
+    <!-- <router-link to="/">Home</router-link> -->
+    
+    <Header></Header>
+
+    <div class="content">
+      <router-view />
+    </div>
+
+    <!-- <Header @toggle-add-listing-view="isShowingAddListingView = true; isShowingAddUserView = false; getAllUsers()" 
             @toggle-add-user-view="isShowingAddUserView = true; isShowingAddListingView = false"></Header>
     
 
@@ -14,7 +22,7 @@
 
       <ListingsGallery :users="allUsers"></ListingsGallery>
 
-    </div>
+    </div> -->
     
   </div>
   

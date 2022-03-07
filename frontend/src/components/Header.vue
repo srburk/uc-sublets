@@ -2,11 +2,17 @@
     <div class="header">
         <div class="header-container row">
 
-            <a href="#">Sign Up</a>
+            <!-- <a href="#">Sign Up</a> -->
+            <router-link to="/signup">Sign Up</router-link>
             <a href="#">Log In</a>
+
+            <router-link to="/listings">Listings</router-link>
  
-            <button @click.native="toggleAddUserView()" class="new-user-btn">Add User</button>
-            <button @click.native="toggleAddListingView()" class="new-listing-btn">New Listing</button>
+            <!-- <button @click.native="toggleAddUserView()" class="new-user-btn">Add User</button> -->
+            <router-link to="/new-listing" class="new-listing-container">
+                <button @click.native="toggleAddListingView()" class="new-listing-btn">New Listing</button>
+            </router-link>
+            <!-- <button @click.native="toggleAddListingView()" class="new-listing-btn">New Listing</button> -->
         </div>
     </div>
 </template>
@@ -72,7 +78,7 @@ export default {
     border-radius: 100px;
     min-width: 9rem;
     padding: 0.5rem;
-    margin-top: 0.75rem;
+    margin-top: 0;
 }
 
 .new-user-btn:hover, .new-listing-btn:hover {

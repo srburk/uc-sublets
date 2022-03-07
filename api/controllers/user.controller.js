@@ -14,7 +14,7 @@ exports.list_users = (req, res) => {
             console.log('Error fetching users');
         } else {
             res.json(users);
-            console.log(users);
+            // console.log(users);
         }
     });
 };
@@ -28,7 +28,7 @@ exports.find_user = (req, res) => {
             console.log('Error finding user by ID');
         } else {
             res.json(user);
-            console.log(user);
+            // console.log(user);
         }
     })
 };
