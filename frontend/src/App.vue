@@ -1,78 +1,27 @@
 <template>
-
-  <div id="app">
-
-    <!-- <router-link to="/">Home</router-link> -->
-    
-    <Header></Header>
+  <div>
+    <MainHeader />
 
     <div class="content">
       <router-view />
     </div>
-
-    <!-- <Header @toggle-add-listing-view="isShowingAddListingView = true; isShowingAddUserView = false; getAllUsers()" 
-            @toggle-add-user-view="isShowingAddUserView = true; isShowingAddListingView = false"></Header>
-    
-
-    <AddUserView @toggle-add-user-view="isShowingAddUserView = false" v-show="isShowingAddUserView"></AddUserView>
-
-    <AddListingView :users="allUsers" @toggle-add-listing-view="isShowingAddListingView = false" v-show="isShowingAddListingView"></AddListingView>
-      
-    <div class="content column">
-
-      <ListingsGallery :users="allUsers"></ListingsGallery>
-
-    </div> -->
-    
   </div>
-  
 </template>
 
 <script>
-
 // components
-import Header from './components/Header.vue'
-import AddUserView from './components/AddUserView.vue'
-import AddListingView from './components/AddListingView.vue'
-import UserCard from './components/UserCard.vue'
-import ListingsGallery from './components/ListingsGallery.vue'
-
-// other imports
-import axios from 'axios';
+import MainHeader from "./components/MainHeader.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Header,
-    AddUserView,
-    AddListingView,
-    UserCard,
-    ListingsGallery
+    MainHeader,
   },
-  data: () => ({
-    isShowingAddUserView: false,
-    isShowingAddListingView: false,
-    allUsers: [],
-    // allListings: []
-  }),
-  methods: {
-    getAllUsers() {
-      axios.get('http://' + window.location.hostname + ':3030/api/users/').then(response => {
-        console.log(response.data);
-        this.allUsers = response.data;
-      });
-    }
-    // getAllListings() {
-    //   axios.get('http://' + window.location.hostname + ':3030/api/listings/').then(response => {
-    //     console.log(response.data);
-    //     this.allListings = response.data;
-    //   });
-    // },
-  }
-}
+};
 </script>
 
 <style>
+/* Global CSS */
 #app {
   font-family: Avenir Next, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -98,9 +47,4 @@ export default {
   display: flex;
   flex-direction: column;
 }
-
-.user-grid {
-  justify-content: flex-start;
-}
-
 </style>

@@ -1,17 +1,13 @@
 <template>
-  <div class="listings-gallery column">
+  <div class="column listings-gallery">
     <div class="row listings-header">
       <h2>Listings:</h2>
       <div class="listings-header-options">
-        <select v-model="listingQuery.user" label="User">
-          <option
-            v-for="user in users"
-            :value="{ _id: user._id }"
-            :key="user._id"
-          >
-            {{ user.firstName }} {{ user.lastName }}
-          </option>
-        </select>
+        <!-- <select v-model="listingQuery.user" label="User">
+                    <option v-for="user in users" :value="{ _id: user._id }" :key="user._id">
+                        {{ user.firstName }} {{ user.lastName }}
+                    </option>
+                </select> -->
         <input
           type="number"
           v-model="listingQuery.minRent"
@@ -27,9 +23,9 @@
           v-model="listingQuery.numRooms"
           placeholder="Number of Rooms"
         />
-        <a @click.native="this.searchListings(listingQuery)" href="#">Apply</a>
+        <a @click="this.searchListings(listingQuery)" href="#">Apply</a>
         <a
-          @click.native="
+          @click="
             this.listingQuery = {
               user: String,
               minRent: Number,
@@ -43,6 +39,7 @@
         >
       </div>
     </div>
+
     <ListingCard
       class="ListingCard"
       v-for="listing in listings"
@@ -57,10 +54,10 @@ import ListingCard from "../components/ListingCard.vue";
 import axios from "axios";
 
 export default {
-  name: "ListingGallery",
+  name: "Listings",
   data: () => ({
     listingQuery: {
-      user: String,
+      // user: String,
       minRent: Number,
       maxRent: Number,
       numRooms: Number,
@@ -70,9 +67,6 @@ export default {
   components: {
     ListingCard,
   },
-  props: {
-    users: Array,
-  },
   methods: {
     searchListings(query) {
       axios
@@ -80,7 +74,7 @@ export default {
           "http://" + window.location.hostname + ":3030/api/listings/search",
           {
             params: {
-              user: query.user._id,
+              // user: query.user._id,
               ...(query.minRent != Number ? { minRent: query.minRent } : {}),
               ...(query.maxRent != Number ? { maxRent: query.maxRent } : {}),
               ...(query.numRooms != Number ? { numRooms: query.numRooms } : {}),
@@ -99,6 +93,9 @@ export default {
 </script>
 
 <style scoped>
+.listings-gallery {
+  margin-top: 0;
+}
 .listings-header {
   justify-content: space-between;
 }
@@ -107,7 +104,8 @@ export default {
   margin-left: 2rem;
 }
 
-.listings-header * {
+.listings-header h2,
+div {
   margin-top: 1rem;
 }
 </style>
