@@ -1,16 +1,30 @@
 
 // imports
 const express = require('express');
-const path = require('path');
+// const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const passport = require('passport');
+const session = require('express-session');
 
 const app = express();
 const port = 3030;
 
 // use it before all route definitions
 app.use(cors({origin: 'http://localhost:8080'}));
+
+//express session
+app.use(session({
+    secret : 'secret',
+    resave : true,
+    saveUninitialized : true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 // routers
 const userRoutes = require('./routes/users.route');

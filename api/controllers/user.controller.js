@@ -1,7 +1,11 @@
 
 // import Model
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
 const userModel = require('../schema/user_schema');
+
+require('../config/passport')(passport); 
 
 // Exports
 exports.list_users = (req, res) => {
@@ -28,31 +32,57 @@ exports.find_user = (req, res) => {
             console.log('Error finding user by ID');
         } else {
             res.json(user);
-            // console.log(user);
         }
     })
 };
 
-exports.create_user = (req, res) => {
-    console.log('POST to /api/users');
-    
-    let newUser = new userModel;
-    newUser._id = mongoose.Types.ObjectId();
-    newUser.firstName = req.body.firstName;
-    newUser.lastName = req.body.lastName;
-    newUser.email = req.body.email;
-    newUser.schoolYear = req.body.schoolYear;
-
-    console.log(newUser);
-    newUser.save((err) => {
+// internal API only
+exports.find_user_by_email = (email) => {
+    userModel.findOne({email: email}, (err, user) => {
         if (err) {
-            res.send('Error adding new user');
-            console.log('Error adding new user')
+            console.log('Email not found');
         } else {
-            res.json(newUser);
-            console.log('Added new user')
+            return user;
         }
     })
+}
+
+exports.login_user = (req, res) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/',
+    });
+}
+
+exports.create_user = (req, res) => {
+    console.log('POST to /api/users');
+
+    const {firstName, lastName, email, password, schoolYear } = req.body;
+
+    let newUser = new userModel;
+    newUser._id = mongoose.Types.ObjectId();
+    newUser.firstName = firstName;
+    newUser.lastName = lastName;
+    newUser.email = email;
+    newUser.schoolYear = schoolYear;
+
+    // encrypt user password
+    bcrypt.genSalt(10, (err,salt)=> {
+        bcrypt.hash(password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser.save((err) => {
+                if (err) {
+                    console.log('Error adding new user')
+                } else {
+                    console.log('Added new user')
+                    res.send('Success!')
+                }
+            })
+        });
+    });
+
+    
 }
 
 exports.update_user = (req, res) => {
